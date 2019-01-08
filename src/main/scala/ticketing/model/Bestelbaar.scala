@@ -1,6 +1,8 @@
 package ticketing.model
 
-trait Bestelbaar extends Ordered [Bestelbaar] {
+import util.MyOrdering
+
+trait Bestelbaar extends MyOrdering[Bestelbaar] {
     def prijs: Int
 
     def compare (that: Bestelbaar) = this.prijs.compare(that.prijs)
