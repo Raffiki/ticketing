@@ -5,10 +5,10 @@ case object NIET_GEPLAATST extends BestelStatus
 case object BEVESTIGD extends BestelStatus
 case object GEANNULEERD extends BestelStatus
 
-class Bestelling[A <: Bestelbaar](account: Account,
+class Bestelling[+A <: Bestelbaar](account: Account,
                                   items: Seq[A],
                                   regels: Seq[Regel],
-                                  logger: Logger[String]) {
+                                  logger: Logger[Bestelling[A]]) {
 
   private var status: BestelStatus = NIET_GEPLAATST
 

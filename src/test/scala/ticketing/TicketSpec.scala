@@ -12,7 +12,7 @@ class TicketSpec
   var frank: Account = _
   var dave: Account = _
 
-  val logger = new ConsoleLogger()
+  val logger = new ConsoleLogger[Bestelling[Bestelbaar]]()
 
   override def beforeEach() {
     eric = new Account("Eric", 20, "email", 500)

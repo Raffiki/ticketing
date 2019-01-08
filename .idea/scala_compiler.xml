@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ScalaCompilerConfiguration">
+    <profile name="sbt 1" modules="ticketing_8324" />
+    <profile name="sbt 2" modules="ticketing">
+      <parameters>
+        <parameter value="-Xlog-implicits" />
+      </parameters>
+    </profile>
+  </component>
+</project>
