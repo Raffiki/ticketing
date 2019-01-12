@@ -1,7 +1,7 @@
 package ticketing.model
 
 trait Ticket extends Bestelbaar {
-  val id: Long
+  val id: Long = Ticket.makeId()
   val naam: String
 
   override def compare(that: Bestelbaar) = that match {
@@ -15,32 +15,40 @@ trait Ticket extends Bestelbaar {
   override def toString = s"id: $id, naam: $naam"
 }
 
-case class EarlyBird private[model] (id: Long, naam: String) extends Ticket {
+object Ticket {
+  private var lastUsedId: Long = 0
+  private def makeId(): Long = {
+    lastUsedId = lastUsedId + 1
+    lastUsedId
+  }
+}
+
+case class EarlyBird private[model] (naam: String) extends Ticket {
   override val prijs = 50
     override def toString = s"Ticket(type: EarlyBird, ${super.toString})"
 }
 
 object EarlyBird {
-  def apply(naam: String): EarlyBird = EarlyBird(1L, naam)
+  def apply(naam: String): EarlyBird = new EarlyBird(naam)
 
 }
 
-case class Normal private[model] (id: Long, naam: String) extends Ticket {
+case class Normal private[model] (naam: String) extends Ticket {
   override val prijs = 100
     override def toString = s"Ticket(type: Normal, ${super.toString})"
 
 }
 
 object Normal {
-  def apply(naam: String): Normal = Normal(1L, naam)
+  def apply(naam: String): Normal = new Normal(naam)
 }
 
-case class VIP private[model] (id: Long, naam: String) extends Ticket {
+case class VIP private[model] (naam: String) extends Ticket {
   override val prijs = 200
     override def toString = s"Ticket(type: VIP, ${super.toString})"
 
 }
 
 object VIP {
-  def apply(naam: String): VIP = VIP(1L, naam)
+  def apply(naam: String): VIP = new VIP( naam)
 }

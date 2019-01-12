@@ -24,6 +24,8 @@ class TicketSpec
   test("Een EarlyBird ticket heeft een id en een prijs") {
     val ticket = EarlyBird.apply(eric.naam)
     ticket.prijs should be(50)
+    println(ticket.id)
+
     ticket.id should be(1L)
     ticket.naam should be(eric.naam)
   }
@@ -54,7 +56,7 @@ class TicketSpec
   }
 
   test(
-    "Een bestelling van VIP ticket door een minderjarige geeft een waarschuwing") {
+    "Een bestelling van VIP ticket door een minderjarige faalt met een waarschuwing") {
     val regel = Regel("VIP", 18)
     val ticket = VIP(julie.naam)
     val bestelling = new Bestelling(julie, Seq(ticket), Seq(regel), logger)

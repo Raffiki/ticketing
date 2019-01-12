@@ -1,5 +1,7 @@
 package ticketing.model
 
+import scala.util.Sorting
+
 sealed trait BestelStatus
 case object NIET_GEPLAATST extends BestelStatus
 case object BEVESTIGD extends BestelStatus
@@ -23,7 +25,7 @@ class Bestelling[+A <: Bestelbaar](account: Account,
 
       toepasbareRegels.flatMap(regel => {
         logger.log(
-          s"validatie bestelling: valideer regel $regel op ticket $ticket")
+          s"validatie bestelling: valideer regel $regel op ticket $ticket", this)
         regel.minimumLeeftijd >= account.leeftijd match {
           case true  => Some(RegelWarning(regel, account))
           case false => None
@@ -32,7 +34,7 @@ class Bestelling[+A <: Bestelbaar](account: Account,
     })
 
   private def valideerMeerdereTickets: Seq[Warning] = {
-    logger.log("validatie bestelling: valideer dat een persoon niet meerdere tickets koopt.")
+    logger.log("validatie bestelling: valideer dat een persoon niet meerdere tickets koopt.", this)
 
     tickets
       .map(_.naam)
